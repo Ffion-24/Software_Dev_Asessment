@@ -1,0 +1,41 @@
+#Task 1
+
+#Creating Lists
+fruits=["apple", "bannana", "cherry"]
+numbers=[10,20,30,40]
+mixed=["text",3.14,True]
+#Access and Inexing
+print(fruits[0])   #result = apple
+print(fruits[-1])  #result = cherry
+#Slicing
+print(numbers[1:3]) #result = 20,30
+print(numbers[:2])  #result = 10,20
+print(numbers[-2:]) #result = 30,40
+#Chaging and updateing lists
+fruits[1] = "orange" # replaceing bannana with orange
+print(fruits)
+
+#Main Task
+students = ["Amir","Sarah","Tom","Aisha","Leo"] #original list
+#Task 1
+students.insert(1 ,"Bob")#add 1 name
+students.insert(2,"Fred")#add second name
+#Task 2
+students.remove("Sarah") # removing a student who has left
+#Task 3
+students.insert(0,"Joe")# adding a student to the begining
+#Task4
+students.sort()# sort the things wtithin the list alphabetic order
+#Task5
+print("Current Students =" , students) #printing task4
+
+#Extention
+colour= ["Green","Red","Blue","Violet","Yellow","Orange","Turquoise","Pink"] # I want the user to print the list of the rainbow by removing and adding items.
+print(colour)
+colour.append(input("What is missing?"))
+print(colour)
+remove = (input("What is one thing that needs to be removed?"))
+remove2 = (input("What is the second thing that needs to be removed?"))
+colour.remove(remove)
+colour.remove(remove2)
+print(colour)
