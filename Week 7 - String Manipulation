@@ -1,0 +1,33 @@
+#Stage 1
+word = input("What is you favourite word?")
+print(word.upper())
+print(word.lower())
+print(word.capitalize())
+print(word.swapcase())
+print(word[::-1])
+print(len(word))
+if 'a' in word:
+    print(f"'a' is present in '{word}' .")
+else:
+    print(f"'a' is not present in '{word}' .")
+
+#Stage 2
+word = "      Hello World    "
+removed = word.strip()
+print (removed)
+removed2 = word.lstrip()
+print(removed2)
+removed3 = word.rstrip()
+print(removed3)
+new_text = word.replace("Hello" , "Bye")
+print(new_text)
+fruits = ["apple", "kiwi", "bannana", "kiwi", "orange", "kiwi"]
+kiwi_count = fruits.count("kiwi")
+print(f"'kiwi' appears {kiwi_count} times")
+text = "Hello Bob"
+print(text.startswith("Hello"))
+print(text.startswith("Bob"))
+print(text.endswith("Hello"))
+print(text.endswith("Bob"))
+
+#Stage 3
