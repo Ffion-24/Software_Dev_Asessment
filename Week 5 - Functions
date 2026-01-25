@@ -1,0 +1,151 @@
+#Task 1
+
+#for correct_password in input("Please enter your password:"):
+ #   if correct_password == "Password1234":
+  #      print("Correct Password")
+# else: print("Incorrect Password")
+#attempt = 3
+#for i in range(3):
+ #   correct_password = 'Password1234'
+  #  password_input = input("Enter your password:")
+   # if password_input == correct_password:
+    #    print("Correct password")
+     #   break
+    #else:
+     #   print("Incorrect password")
+     #   attempt -= 1
+      #  print("You have", attempt, "attempt(s) left.")
+    #if attempt == 0:
+     #   print("You are locked out of your account.")
+attempts = 3
+while range(3):
+    password = "Password1234"
+    passwordAttempts = input("Enter a password: ")
+    if passwordAttempts == password:
+        print("You entered the correct password")
+        break
+    else:
+        attempts -= 1
+        print("Wrong password")
+        print("You have", attempts, "attempts left")
+        if attempts == 0:
+            print("You did not enter the correct password and you are locked out of your account.")
+            break
+
+#Task 2
+for b in range (10):
+    for a in range(1, 21):
+        print('X' , end='')
+    print()
+
+print("Next Section")
+
+for b in range (10):
+    for a in range(1, 6):
+        print('X' , end='')
+    print()
+
+print("Next Section")
+for e in range (10):
+    for f in range(1,6):
+        print('X' , end='')
+    print()
+for c in range(4):
+    for d in range(1,16):
+        print('X' , end='')
+    print()
+
+print("Next Section")
+
+for g in range (4):
+    for h in range(1,16):
+        print('X' , end='')
+    print()
+
+
+for missing in range (10):
+    print('     ' , end='')
+    for missinc in range(5):
+        print ('X' , end='')
+    print()
+    
+#Task3
+j=1
+for row in range (5):
+    for num in range(7):
+        new=row*7+num+1
+        if new <= 35:
+            print(f"{new:02} "  , end="")
+        
+    print()
+
+#Practice 1
+fileCount = 0
+fileSize = None
+fileCount +=1
+fileSize = 1000
+print("You have", fileCount , "file(s). Your file size is" , fileSize)
+
+#Practice 2
+while True:
+    try:
+        userAge = int(input("What is your age?"))
+        if 0<= userAge <= 17:
+            print("You are a Child!!")
+            break
+        if 18 <= userAge <= 64:
+            print("You are an Adult!!")
+            break
+        if 65 <= userAge:
+            print("You are a Pensioner!!!")
+    except ValueError:
+        print("Only whole numbers. Try Again")
+
+#Pratice 3
+import random
+
+randomNumber = random.randint(1, 100)
+while True:
+    try:
+        userGuess = int(input("Guess the Number:"))
+        if randomNumber > userGuess:
+            print("Try agiain. Your too low!")
+        if randomNumber < userGuess:
+            print("Try again. Your too high!")
+        if randomNumber == userGuess:
+            print("You guessed correctly. The number was" , randomNumber)
+            break
+    except ValueError:
+        print("Only whole numbers. Try Again")
+
+#Practice 4
+
+#Practce 5
+print("Menu")
+print("1. Pasta")
+print("2.Pizza")
+print("3.Burger")
+print("4.Chicken Nuggets")
+print("5.Salad")
+while True:
+    try:
+        userOrder = int(input("What would you like to order? Use the Numbers above"))
+        if userOrder == 1:
+            print("You have ordered Pasta!")
+            break
+        if userOrder == 2:
+            print("You have ordered Pizza!")
+            break
+        if userOrder == 3:
+            print("You have ordered a Burger")
+            break
+        if userOrder == 4:
+            print("You have ordered Chinken Nuggets")
+            break
+        if userOrder == 5:
+            print("You have ordered a Salad")
+            break
+        else:
+            print("Please pick within the range please.")
+    except ValueError:
+        print("Numbers within range please.")
