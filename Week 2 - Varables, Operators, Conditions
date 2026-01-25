@@ -1,0 +1,65 @@
+#Task 1 Taxes and Price
+itemPrice = float(input("Enter the item Price")) # Original had itemtax on the same line as this
+itemtax = 8.5 # changed it so that it wouldnt run a syntax error
+itemtax = itemPrice /20 # this figurs out the correct amount of tax per amount
+totalCost = itemPrice + itemtax
+numberItems = int(input("How many items are you purchasing?"))
+totalPrice = totalCost*numberItems #Figuring out multiple items line 7 and 10
+print("Tax on the item is £" , f'{itemtax: .2f}')
+print("Total item cost is £",f'{totalCost:.2f}')
+print("The total price for" , numberItems , "is £" , f'{totalPrice: .2f}')
+
+#Task 2 Years Born
+yearBorn = int(input("What year were you born?"))
+if yearBorn %4 == 0: # looks for no remeinders Remainders = no leap year
+    print("You were born on a leap year.")
+else:
+    print("You were not born on a leap year.") # two options both are not printed
+if yearBorn == 2007: # Looks specifically at the year
+    print("You were born on the same year as me")
+else:
+    print("You were not born on the same year as me.")
+if yearBorn > 2007:
+    print("You are younger than me.")
+elif yearBorn ==2007:
+    print("You are the same age as me!!!")
+else:
+    print("You are older than me.")
+
+#Task 3 Faranhight to Celsicus
+tempCelsicus = int(input("What is the temperature? In Celsius."))
+tempFahrenheit = tempCelsicus* (9/5) + 32
+print(tempCelsicus,("C"), "=" , tempFahrenheit,("F"))
+
+# Task 4 Currency Converstion
+question = input("Do you want to convert into £ or $?")#asks what block of code needs to be run
+if question == "$":
+    poundsConversion = (int(input("How many pounds (£) do you want to convert into dollars ($)?")))
+    conversionAmount =float(input("What is the conversion rate?"))
+    dollarAmount = f'{(poundsConversion * conversionAmount): .2f}'
+    print("$" , dollarAmount)
+else:
+    dollarAmount = int(input("How many dollars ($) do you want to convert into pounds (£)?"))
+    conversionAmount = float(input("What is the conversion rate?"))
+    poundsConversion = f'{(dollarAmount/conversionAmount): .2f}'
+    print("£", poundsConversion)
+
+#Task 5 Maxium Numbers
+number1 = input("Inupt A Single Digit Number:")
+number2 = input("Inupt A Single Digit Number:")
+number3 = input("Inupt A Single DigitNumber:")
+number4 = input("Inupt A Single Digit Number:")
+number5 = input("Inupt A Single Digit Number:")
+
+maximum = number1 #sets the maximum to number 1 regardless of input
+
+# Changing the max to get the correct one
+if number2 > maximum: #if greater than changes vairible before moving on
+    maximum = number2
+if number3 > maximum:  #if less than keeps the same and moves on
+    maximum = number3
+if number4 > maximum:
+    maximum = number4  
+if number5 > maximum:
+    maximum = number5
+print(maximum , "is the maximum number.") # prints the final value for maximum
