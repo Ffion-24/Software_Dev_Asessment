@@ -1,0 +1,16 @@
+#Cutomer Analysis
+customer_list1 = ["Ane","Bob","Jack","Fred"]
+customer_list2 = ["Ane","Jeff","Greg","Fred"]
+new_customers = set(customer_list2).difference(customer_list1)
+regulars =set(customer_list1).intersection(customer_list2)
+nonReturn = set(customer_list1).difference(customer_list2)
+print("These are the new customers:" ,new_customers)
+print("These are the regulars:" ,regulars)
+print("These cutomers have not reurned:" , nonReturn)
+
+#Station Analysis
+station1 = 0
+station2 = 0
+station3 = 0
+station4 = 0
+vist1 = station1 + 1
