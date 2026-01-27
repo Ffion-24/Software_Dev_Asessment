@@ -1,16 +1,168 @@
-#Cutomer Analysis
-customer_list1 = ["Ane","Bob","Jack","Fred"]
-customer_list2 = ["Ane","Jeff","Greg","Fred"]
-new_customers = set(customer_list2).difference(customer_list1)
-regulars =set(customer_list1).intersection(customer_list2)
-nonReturn = set(customer_list1).difference(customer_list2)
-print("These are the new customers:" ,new_customers)
-print("These are the regulars:" ,regulars)
-print("These cutomers have not reurned:" , nonReturn)
+#Phase 1 = Data:
 
-#Station Analysis
-station1 = 0
-station2 = 0
-station3 = 0
-station4 = 0
-vist1 = station1 + 1
+customerMonthOne = [
+        "Ali", "Ben", "Ali", "Dana", "Cara", "Ben"
+    ] #Custermers from the first month
+
+customerMonthTwo = [
+        "Ali", "Ella", "Ben", "Frank", "Cara", "Ben"
+    ] #Customers from the second month
+
+bookingData = [
+        ("Ali", "StationA", "Weekday", 2),
+        ("Ben", "StationB", "Weekend", 1),
+        ("Ali", "StationA", "Weekday", 3),
+        ("Cara", "StationC", "Weekday", 2),
+        ("Ella", "StationB", "Weekend", 2)
+    ] #example data
+
+#Defining functions using data:
+
+def loadSampleData():
+    loyalCustomerSet = {"Ali", "Cara"}
+    
+    return customerMonthOne, customerMonthTwo, bookingData, loyalCustomerSet
+
+
+print(loadSampleData())
+
+#Phase 2 = Customer Sets:
+
+def loadSetData(customerMonthOne, customerMonthTwo):
+
+    setMonthtwo = set(customerMonthTwo) #Changing list into set (both lines)
+    setMonthone = set(customerMonthOne)
+    
+
+    return setMonthone, setMonthtwo
+
+print(loadSetData(customerMonthOne, customerMonthTwo))
+
+monthOne, monthTwo = loadSetData(customerMonthOne , customerMonthTwo)
+
+#Customer Analyasis:
+def analyseCustomerActivity(monthOne, monthTwo):
+    regularCustomers = monthOne.intersection(monthTwo) #In both sets
+    newCustomers = monthTwo.difference(monthOne) # Only in month 2
+    inactiveCustomers = monthOne.difference(monthTwo)# Only in month 1
+    allUniqueCustomers = monthOne.union(monthTwo) # Everyone (no duplicates)
+
+    return regularCustomers, newCustomers, inactiveCustomers, allUniqueCustomers
+
+print(analyseCustomerActivity(monthOne , monthTwo))
+
+#Phase 3 = Booking:
+
+def showBookingUsage(bookingData):
+   
+    if bookingData:
+        firstBooking = bookingData[0]
+        # Tuple indexing
+        firstCustomer = firstBooking[0]
+        firstStation = firstBooking[1]
+        # Tuple unpacking
+        customerId, stationName, dayType, durationHours = firstBooking
+
+        print("Example booking tuple:", firstBooking) #66 to 69 are print functions after the tuplets are defined and indexed.
+        print("First booking customer:", firstCustomer)
+        print("First booking station:", firstStation)
+        print("Unpacked booking:", customerId, stationName, dayType, durationHours)
+    
+showBookingUsage(bookingData)
+
+#Phase 4 = Building Dictionary
+
+def buildStationStats(bookingData): 
+    stationCounts: dict[str, int] = {}
+    stationCustomerSet: dict[str, set[str]] = {}
+ 
+    
+    stationCounts = {}
+    stationCustomerSet = {}
+#checking for things such as customer ID
+    for booking in bookingData:
+        customerId, stationName, dayType, durationHours = booking
+
+        # Use get or setdefault for stationCounts
+        currentCount = stationCounts.get(stationName, 0)
+        stationCounts[stationName] = currentCount + 1
+
+        # Use setdefault for stationCustomerSet
+        customerSetForStation = stationCustomerSet.setdefault(stationName, set())
+        customerSetForStation.add(customerId)
+    return stationCounts, stationCustomerSet
+
+#This is Customer Stats different to the one before which is Station Stats
+def buildCustomerStats(bookingData):
+    customerHours = {}
+
+    for booking in bookingData:
+        customerId, stationName, dayType, durationHours = booking
+
+        # Use get or setdefault to update total hours
+        currentHours = customerHours.get(customerId, 0)
+        customerHours[customerId] = currentHours + durationHours
+    return customerHours
+
+#To find the most popular station:
+def findBusiestStation(stationCounts):
+   
+    if not stationCounts:
+        return None, 0
+
+    # Simple max by value
+    busiestStationName = max(stationCounts, key=lambda name: stationCounts[name])
+    busiestStationCount = stationCounts[busiestStationName]
+
+    return busiestStationName, busiestStationCount
+
+#Phase 5 = Summery Report
+stationCounts, stationCustomerSet = buildStationStats(bookingData)
+customerHours = buildCustomerStats(bookingData)
+
+busiestStationName, busiestStationCount = findBusiestStation(stationCounts)
+
+regularCustomers, newCustomers, inactiveCustomers, allUniqueCustomers = analyseCustomerActivity(monthOne, monthTwo)
+
+def generateSummaryReport(
+    regularCustomers,
+    newCustomers,
+    inactiveCustomers,
+    allUniqueCustomers,
+    stationCounts,
+    stationCustomerSet,
+    busiestStationName,
+    busiestStationCount,
+    customerHours,
+):
+    print("\n=== CityBikeGo Monthly Summary Report ===\n")
+
+    print("Total unique customers this month:", len(allUniqueCustomers))
+    print("Regular customers (both months):", sorted(regularCustomers))
+    print("New customers (this month only):", sorted(newCustomers))
+    print("Inactive customers (did not return):", sorted(inactiveCustomers))
+    print()
+
+    print("Station activity (bookings per station):")
+    for stationName, count in stationCounts.items():
+        print(f"  {stationName}: {count} bookings, {len(stationCustomerSet[stationName])} customers")
+
+    print()
+    print("Busiest station:", busiestStationName, "with", busiestStationCount, "bookings")
+    print()
+
+    print("Customer hours cycled:")
+    for customerId, hours in customerHours.items():
+        print(f"  {customerId}: {hours} hours")
+
+    print("\n=== End of Report ===\n")
+
+print(generateSummaryReport(regularCustomers,
+    newCustomers,
+    inactiveCustomers,
+    allUniqueCustomers,
+    stationCounts,
+    stationCustomerSet,
+    busiestStationName,
+    busiestStationCount,
+    customerHours,))
