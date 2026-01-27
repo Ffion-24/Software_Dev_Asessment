@@ -31,3 +31,19 @@ print(text.endswith("Hello"))
 print(text.endswith("Bob"))
 
 #Stage 3
+text ="Hello Bobby!  "
+cut = text.split() #split text
+print(cut)
+
+words = ["Cat", "says", "Hello."]
+print("".join(words))
+print("a".join(words))
+
+print("hello".zfill(6))
+
+def clean(text):
+    if not isinstance (text, str):
+        return None
+    return text.strip().lower()
+
+print(clean(text))
