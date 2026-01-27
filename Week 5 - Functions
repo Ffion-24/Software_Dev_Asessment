@@ -119,6 +119,11 @@ while True:
         print("Only whole numbers. Try Again")
 
 #Practice 4
+i = 1
+
+for i in range(13):
+    x = 12 * i
+    print(f"12 * {i} = {x}")
 
 #Practce 5
 print("Menu")
