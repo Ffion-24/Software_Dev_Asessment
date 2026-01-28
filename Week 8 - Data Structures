@@ -1,3 +1,5 @@
+#Import for bottom of code:
+import matplotlib.pyplot as plt
 #Phase 1 = Data:
 
 customerMonthOne = [
@@ -166,3 +168,43 @@ print(generateSummaryReport(regularCustomers,
     busiestStationName,
     busiestStationCount,
     customerHours,))
+
+
+
+# Phase 6 – Reflection
+
+def printReflection():
+  
+    print("Reflection prompts:")
+    print("- Why were sets essential for customer analysis?:" \
+    " Sets are essiental for customer analysis because it allows for unique data to be gathered.")
+    print("- Why choose tuples for booking records?:" \
+    "Booking records include related peices of data and that is the main use tuples.")
+    print("- Why do dictionaries suit station and customer statistics?:" \
+    "By using a dictionarys the data is easly retreaved for both types of statistcs.")
+    print("- Which methods (get, setdefault, update, pop, etc.) did you use and why?:" \
+    "I used .get to simplify the code. I also used setDefalut. The reason that I used this is to allow safe mutaion of sets and .")
+    
+print(printReflection())
+
+def runCityBikeGoAnalysis():
+
+    pass
+
+if __name__ == "__main__":
+    runCityBikeGoAnalysis()
+
+    
+
+
+def plotCustomerTypes(regularCustomers, newCustomers, inactiveCustomers):
+    categories = ["Regular", "New", "Inactive"]
+    positions = range(len(categories))
+    
+    plt.figure()
+    plt.tight_layout()
+    plt.show()
+
+
+def plotCustomerHours(customerHours):
+    plt.show()
