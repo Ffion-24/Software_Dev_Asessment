@@ -197,7 +197,7 @@ if __name__ == "__main__":
     
 
 
-def plotCustomerTypes(regularCustomers, newCustomers, inactiveCustomers):
+def plotCustomerTypes(regularCustomers, newCustomers, inactiveCustomers):  #plotting the graph
     categories = ["Regular", "New", "Inactive"]
     positions = range(len(categories))
     
