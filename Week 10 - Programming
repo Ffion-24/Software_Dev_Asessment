@@ -1,0 +1,177 @@
+#Phase 1 = Staff Authentication
+
+#Staff Data Store
+
+email = "drSmith.hospital.nhs"
+role = "doctor"
+department = "Cardiology"
+username = "drSmith"
+password = "Cardiology123"
+ 
+
+#Username and Password Input
+
+attempts_User = 3
+while range(3):
+    user_nameint = input("What is your username?")
+    if user_nameint == username:
+       break
+    else:
+       attempts_User -=1
+       print("Wrong Username.")
+       print("You have" , attempts_User , "attempts ramaining.")
+       if attempts_User == 0:
+          print("You did not enter the correct Username and you are locked out of your account.")
+          break
+attempts_Pass = 3
+while range(3):
+    if attempts_User == 0:
+        break
+    else:
+        passwordInt = input("What is your password?")
+        if passwordInt == password:
+           break
+        else:
+            attempts_Pass -=1
+            print("Wrong Password.")
+            print("You have" , attempts_Pass , "attempts ramaining.")
+        if attempts_Pass == 0:
+          print("You did not enter the correct Password and you are locked out of your account.")
+          break
+#Phase 8
+print("Welcome to the main Menu")
+print(f"""
+1:Enter or update paitent data details
+2:Encrypt patient Data
+3:Dycrpt Patient Data
+4:Convert Paitent Data
+5:Show Current Staff Idenity and Permissions
+6:Exit System""")
+staffChoice = int(input("What would you like to veiw? Use the Numbers above"))
+
+if staffChoice == 1:
+
+    #Phase 2 = Collecting  PII
+
+    #Patient Infomation Input
+    print("Input the patient infomation:")
+    full_nameInt = input("Enter the patient's Full Name:")
+    date_BirthInt = input("Enter the patent's date of birth (DD/MM/YYYY):")
+    place_BirthInt = input("Enter the patent's birth place:")
+    country_BirthInt = input("Enter the patent's country of birth:")
+    adress_liveInt = input("Enter the patent's full adress:")
+
+    patientPII = f"""
+    Patient PII:
+    Full Name: {full_nameInt}
+    Date of birth: {date_BirthInt}
+    Adress: {adress_liveInt}
+    Place fo Brith: {place_BirthInt}
+    Country of Birth: {country_BirthInt}
+    """
+    print(patientPII)
+elif staffChoice == 2:
+
+    #Phase 3 = Encryption and Decryption
+    encryptedPII =""
+
+    for a in patientPII:
+        encryptedChr = chr(ord(a)+3)
+        # ord() changes characters into point values
+        #chr() changes point values into characters
+        # + shifts the charters
+        encryptedPII += encryptedChr
+
+    decryptedPII = ""
+
+    for b in encryptedPII:
+        decryptedChar = chr(ord(b)-3)
+        # - shifts the characters
+        decryptedPII += decryptedChar
+elif staffChoice == 3:
+    #Phase 4 = Simulated IBE
+
+    PIIOwnerEncypted = input("Please input you email:")
+
+    if email == PIIOwnerEncypted:
+        print("Identity Verified")
+
+    else:
+        print("Access Denied") # doesnt allow acess if email is wrong
+        print("Patient PII:")
+        print(encryptedPII)
+
+    print("\n")
+
+    #Phase 5 = Attributed Based Encryption
+    print("Second Vefification")
+    staffRole = input("Please enter your role:")
+    staffDeparment = input("Please input your department:")
+    if email == PIIOwnerEncypted:
+        if staffRole.lower() == "doctor" or staffRole.lower() == "nurse":
+            if staffDeparment.lower() == "cardiology":
+                print("Identity Verifide")
+
+            elif staffRole.lower() == "admin":
+                print("Admins cannot have access to Patient PII.")
+
+            else:
+                print("Department cannot have access to this infomation.")
+        else:
+            print("Acess Denied: your role does not permmit veiwing data.")
+
+
+    #Phase 6 = Digital Signiture
+    signiture = 0
+
+    for chara in encryptedPII:
+        signiture += ord(chara)
+
+    print("Digital Signiture Created:" , signiture)
+
+    newSig = 0
+    for chara in encryptedPII:
+        newSig += ord(chara)
+
+    print("Recalculated Signiture:" , newSig)
+
+    if signiture == newSig:
+        print("Data Intgerity Chack Passed")
+
+        for chara in encryptedPII:
+            decryptedChar += chr(ord(chara)-3)
+        # - shifts the characters
+        
+        print("Decrypted PII:")
+        print(decryptedPII)    
+    else:
+        print("Patient Record may have been alterd. Decryption Stopped.")
+elif staffChoice == 4:
+    #Phase 7 = Numberical Analysis Changing Analysis
+    for num in decryptedPII:
+        decimalValue = ord(num)
+
+        binary = bin(decimalValue)
+        hexi = hex(decimalValue)
+        octal = oct(decimalValue)
+
+    print("Number Convertions")
+    print(f"""
+    ecimal Value: {decimalValue},
+    Binary: {binary}
+    Heximal: {hexi}
+    Octal {octal}""")
+    
+elif staffChoice == 5:
+    print("Staff Role:", role)
+    print("You have acess to" , department , "Patients")
+    if role == "doctor" or "nurse":
+        print("You can Veiw and Change Paient data and medical records.")
+    elif role == "admin":
+        print("Department cannot have access to this infomation.")
+    else:
+        print("Acess Denied: your role does not permmit veiwing data.")
+elif staffChoice == 6:
+    print("Exiting Menu")
+else:
+    print("Value Error")
