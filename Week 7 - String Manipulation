@@ -47,3 +47,272 @@ def clean(text):
     return text.strip().lower()
 
 print(clean(text))
+
+#Stage 4
+import random
+
+WORDS = ["python", "castle", "window", "forest", "bridge", "guitar", "dinosaur", "umbrella"]
+
+REVEAL_ANSWERS = False  
+
+
+
+# Utilities
+
+def clean(s):
+    return s.strip().lower()
+
+
+def redact(answer):
+    return "<hidden>" if not REVEAL_ANSWERS else answer
+
+
+
+
+def StringManipulationReverse(word):
+    #must use slicing (e.g., s[::-1])
+    
+    return None
+
+def StringManipulationUpperLowerLowered(word):
+    #must use .upper() to build the clue; must use .lower() for the answer
+    
+    return None
+
+def StringManipulationTitleCase(word):
+    #must use .title()
+    
+    return None
+
+def StringManipulationSwapcase(text):
+    #must use .swapcase()
+    
+    return None
+
+def StringManipulationStrip(sample):
+    #must use .strip()
+    
+    return None
+
+def StringManipulationLstrip(sample):
+    #must use .lstrip('-')
+    
+    return None
+
+def StringManipulationCentre(text):
+    #must use .center(width, fillchar)
+    
+    return None
+
+def StringManipulationStartsEnds(word, pre, suf):
+    #must use .startswith() and .endswith()
+    #should return tuple ("yes"/"no", "yes"/"no")
+    
+    return None
+
+def StringManipulationFindIndex(s, sub):
+    #must use .find() and .index()
+    #should return tuple (pos_find, pos_index)
+    
+    return None
+
+def StringManipulationCount(word, ch):
+    #must use .count(ch)
+    
+    return None
+
+def StringManipulationSplitJoin(csv):
+    #must use .split(',') and '-'.join(...)
+    
+    return None
+
+def StringManipulationSplitlinesJoin(poem):
+    #must use .splitlines() and ';'.join(lines)
+    
+    return None
+
+def StringManipulationZfill(n):
+    #must use .zfill(5)
+    
+    return None
+
+def StringManipulationCharTests(s):
+    #must call isalpha, isdigit, isalnum, isspace, islower, isupper, istitle
+    #should return a tuple of seven booleans in that order
+    
+    return None
+
+
+
+# Wrapper puzzles
+
+def pReverse(word):
+    # prefer learner version
+    _student_target = StringManipulationReverse(word)
+    # internal fallback (required method)
+    clue = word[::-1]
+    target = word
+    guess = input(f"Reverse it (must use slicing). Clue: {clue}\nOriginal: ")
+    ok = clean(guess) == clean(target)
+    return ok, redact(target)
+
+def pUpperLower(word):
+    _student_target = StringManipulationUpperLowerLowered(word)
+    clue = word.upper()  # required .upper()
+    target = word.lower()  # required .lower()
+    guess = input(f"Make this lowercase (must use .lower()): {clue}\nLowercase: ")
+    ok = clean(guess) == target
+    return ok, redact(target)
+
+def pTitle(word):
+    _student_target = StringManipulationTitleCase(word)
+    sentence = f"{word} is great"
+    clue = sentence.lower()
+    target = sentence.title()  # required .title()
+    guess = input(f"Title-case this (must use .title()): '{clue}'\nAnswer: ")
+    ok = guess == target
+    return ok, redact(target)
+
+def pSwapcase(_word):
+    clue_text = "PyThOn RuLeS"
+    _student_target = StringManipulationSwapcase(clue_text)
+    target = clue_text.swapcase()  # required .swapcase()
+    guess = input(f"Swap the case (must use .swapcase()): {clue_text}\nAnswer: ")
+    ok = guess == target
+    return ok, redact(target)
+
+def pStrip(_word):
+    sample = "   spaced out   "
+    _student_target = StringManipulationStrip(sample)
+    target = sample.strip()  # required .strip()
+    guess = input(f"Trim spaces (must use .strip()): [{sample}]\nAnswer: ")
+    ok = guess == target
+    return ok, redact(target)
+
+def pLstripRstrip(_word):
+    sample = "---left only"
+    _student_target = StringManipulationLstrip(sample)
+    target = sample.lstrip("-")  # required .lstrip("-")
+    guess = input(f"Remove leading '-' only (must use .lstrip('-')): [{sample}]\nAnswer: ")
+    ok = guess == target
+    return ok, redact(target)
+
+def pReplace(word):
+    masked = "".join("*" if ch.lower() in "aeiou" else ch for ch in word)
+    clue = masked
+    # not revealing the answer
+    guess = input(
+        f"Unmask vowels in '{clue}' (type original word). "
+        f"(earlier built with repeated .replace())\nAnswer: "
+    )
+    ok = clean(guess) == clean(word)
+    return ok, redact(word)
+
+def pAlign(_word):
+    text = "MENU"
+    _student_target = StringManipulationCentre(text)
+    target = text.center(20, "-")  # required .center()
+    guess = input("Centre 'MENU' to width 20 with '-' (must use .center()):\nAnswer: ")
+    ok = guess == target
+    return ok, redact(target)
+
+def pPrefixSuffix(word):
+    pre = word[:2]
+    suf = word[-2:]
+    _student_pair = StringManipulationStartsEnds(word, pre, suf)
+    correct_pre = "yes" if word.startswith(pre) else "no"  # required .startswith()
+    correct_suf = "yes" if word.endswith(suf) else "no"    # required .endswith()
+    guess_pre = input(f"Does '{word}' start with '{pre}'? (yes/no) ").strip().lower()
+    guess_suf = input(f"Does '{word}' end with '{suf}'? (yes/no) ").strip().lower()
+    ok = (guess_pre == correct_pre) and (guess_suf == correct_suf)
+    return ok, redact(f"starts:{correct_pre}, ends:{correct_suf}")
+
+def pFindIndex(_word):
+    s = "mississippi"
+    _student_pair = StringManipulationFindIndex(s, "ss")
+    pos_find = s.find("ss")    # required .find()
+    pos_index = s.index("ss")  # required .index()
+    ans1 = input(f"In '{s}', find position of 'ss' (must use .find()): ")
+    ans2 = input(f"...and (must use .index()): ")
+    ok = ans1.isdigit() and ans2.isdigit() and int(ans1) == pos_find and int(ans2) == pos_index
+    return ok, redact(f"find:{pos_find}, index:{pos_index}")
+
+def pCount(word):
+    ch = random.choice("aeiou")
+    _student_target = StringManipulationCount(word, ch)
+    target = word.count(ch)  # required .count()
+    ans = input(f"How many '{ch}' in '{word}'? (must use .count('{ch}')) ")
+    ok = ans.isdigit() and int(ans) == target
+    return ok, redact(str(target))
+
+def pSplitJoin(_word):
+    csv = "red,blue,green"
+    _student_target = StringManipulationSplitJoin(csv)
+    target = "-".join(csv.split(","))  # required .split and .join
+    ans = input(f"Turn commas into hyphens (must use .split and .join): {csv}\nAnswer: ")
+    ok = ans == target
+    return ok, redact(target)
+
+def pSplitlinesJoin(_word):
+    poem = "Roses\nViolets\nSugar\nSpice"
+    _student_target = StringManipulationSplitlinesJoin(poem)
+    lines = poem.splitlines()     # required .splitlines()
+    target = ";".join(lines)      # required .join
+    ans = input("Join lines with ';' (no spaces) (must use .splitlines() and .join): ")
+    ok = ans == target
+    return ok, redact(target)
+
+def pZfill(_word):
+    n = "42"
+    _student_target = StringManipulationZfill(n)
+    target = n.zfill(5)  # required .zfill
+    ans = input("Pad '42' to width 5 with zeros (must use .zfill(5)):\nAnswer: ")
+    ok = ans == target
+    return ok, redact(target)
+
+def pCharTests(_word):
+    s = input(
+        "Type something; we'll classify it.\n"
+        "Try: .isalpha(), .isdigit(), .isalnum(), .isspace(), .islower(), .isupper(), .istitle()\n"
+        "Input: "
+    )
+    _student_tuple = StringManipulationCharTests(s)
+    results = (s.isalpha(), s.isdigit(), s.isalnum(), s.isspace(), s.islower(), s.isupper(), s.istitle())
+    print("alpha digit alnum space lower upper title ->", results)
+    ok = any(results)
+    return ok, "At least one of the tests should be True."
+
+
+PUZZLES = [
+    pReverse, pUpperLower, pTitle, pSwapcase,
+    pStrip, pLstripRstrip, pReplace, pAlign,
+    pPrefixSuffix, pFindIndex, pCount,
+    pSplitJoin, pSplitlinesJoin, pZfill, pCharTests
+]
+
+
+def main():
+    print("String Gauntlet — Skeleton (answers hidden; complete the StringManipulation functions)")
+    lives, score, rounds = 3, 0, 5
+    for r in range(1, rounds + 1):
+        word = random.choice(WORDS)
+        puzzle = random.choice(PUZZLES)
+        print(f"\n=== Round {r} | Lives: {lives} | Score: {score} ===")
+        correct, reveal = puzzle(word)
+        if correct:
+            print(" Correct!")
+            score += 1
+        else:
+            # Do not print the actual expected answer unless REVEAL_ANSWERS is True
+            print(f" Not quite. Answer: {reveal}")
+            lives -= 1
+        if lives == 0:
+            break
+    print(f"\nGame over! Final score: {score}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+#The END
